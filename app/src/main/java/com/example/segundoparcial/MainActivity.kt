@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var passwordET: EditText
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +29,14 @@ class MainActivity : AppCompatActivity() {
         passwordET = findViewById(R.id.PasswordET)
         loginButton = findViewById(R.id.LoginButton)
         registerButton = findViewById(R.id.RegisterButton)
-        sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+
+        val preferences = getSharedPreferences("loginPref", MODE_PRIVATE)
+        val usernamePref = preferences.getString("name", "")
+        val passwordPref = preferences.getString("pass", "")
+
 
         loginButton.setOnClickListener {
-            login()
+            login(usernamePref, passwordPref)
         }
 
         registerButton.setOnClickListener {
@@ -42,34 +45,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun register() {
-        val username = usernameET.text.toString()
-        val password = passwordET.text.toString()
-
-        if (username.isNotEmpty() && password.isNotEmpty()) {
-            val editor = sharedPreferences.edit()
-            editor.putString("username", username)
-            editor.putString("password", password)
-            editor.apply()
-
-            Toast.makeText(this, "Se registro el usuario", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Complete los dos campos", Toast.LENGTH_SHORT).show()
-        }
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
-    private fun login() {
+    private fun login(usernamePref: String?, passwordPref: String?) {
         val username = usernameET.text.toString()
         val password = passwordET.text.toString()
 
-        val storedUsername = sharedPreferences.getString("username", null)
-        val storedPassword = sharedPreferences.getString("password", null)
-
-        if (username == storedUsername && password == storedPassword) {
-            Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show()
+        if (username == usernamePref && password == passwordPref) {
 
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
-            //finish()
         } else {
             Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
         }

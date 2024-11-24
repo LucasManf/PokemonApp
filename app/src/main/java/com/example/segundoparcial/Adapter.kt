@@ -16,11 +16,12 @@ class Adapter(private val pokemons: List<PokemonDetails>) : RecyclerView.Adapter
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         private val image: ImageView = view.findViewById(R.id.imageView)
         private val nameTV: TextView = view.findViewById(R.id.textView)
-        private val idTV: TextView = view.findViewById(R.id.idTextView)
+        private val typeTV: TextView = view.findViewById(R.id.TypeTextView)
 
         fun bind(pokemon: PokemonDetails) {
+            val pokemonType = pokemon.types[0].type.name
             nameTV.text = pokemon.name
-            idTV.text = pokemon.id.toString()
+            typeTV.text = "type: $pokemonType"
 
             Picasso.get()
                 .load(pokemon.sprites.front_default)
