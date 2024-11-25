@@ -16,6 +16,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    //Declaro variables del UI
     private lateinit var usernameET: EditText
     private lateinit var passwordET: EditText
     private lateinit var loginButton: Button
@@ -25,16 +27,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Inicializo elementos del UI
         usernameET = findViewById(R.id.UsernameET)
         passwordET = findViewById(R.id.PasswordET)
         loginButton = findViewById(R.id.LoginButton)
         registerButton = findViewById(R.id.RegisterButton)
 
+        //Recupero elementos guardados con SharedPreferences
         val preferences = getSharedPreferences("loginPref", MODE_PRIVATE)
         val usernamePref = preferences.getString("name", "")
         val passwordPref = preferences.getString("pass", "")
 
 
+        //OnClickListener de los botones Login y Register
         loginButton.setOnClickListener {
             login(usernamePref, passwordPref)
         }
@@ -44,11 +49,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //Funcion Register
     private fun register() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 
+    //Funcion Login
     private fun login(usernamePref: String?, passwordPref: String?) {
         val username = usernameET.text.toString()
         val password = passwordET.text.toString()

@@ -10,10 +10,11 @@ import com.squareup.picasso.Picasso
 
 class Adapter(private val pokemons: List<PokemonDetails>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-
     lateinit var onItemClickListener: (PokemonDetails) -> Unit
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+        //Declaro variables del UI
         private val image: ImageView = view.findViewById(R.id.imageView)
         private val nameTV: TextView = view.findViewById(R.id.textView)
         private val typeTV: TextView = view.findViewById(R.id.TypeTextView)

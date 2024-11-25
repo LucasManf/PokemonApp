@@ -9,7 +9,7 @@ data class PokemonResult(
     val url: String
 )
 
-// Detalles de cada Pokémon (ejemplo con los campos necesarios)
+// Detalles de cada Pokémon
 data class PokemonDetails(
     val id: Int,
     val name: String,

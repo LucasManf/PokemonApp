@@ -9,6 +9,7 @@ import android.widget.Toast
 
 class RegisterActivity : AppCompatActivity() {
 
+    //Declaro variables del UI
     private lateinit var buttonRegister : Button
     private lateinit var editTextEnterName: EditText
     private lateinit var editTextEnterPassword: EditText
@@ -17,10 +18,12 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        //Inicializo elementos del UI
         buttonRegister = findViewById(R.id.button3)
         editTextEnterName = findViewById(R.id.ETUsername)
         editTextEnterPassword = findViewById(R.id.ETPassword)
 
+        //OnClickListener del boton de registro
         buttonRegister.setOnClickListener {
             if (editTextEnterName.text.isNullOrEmpty() && editTextEnterPassword.text.isNullOrEmpty()) {
                 Toast.makeText(this, "Ingrese user y password", Toast.LENGTH_SHORT).show()

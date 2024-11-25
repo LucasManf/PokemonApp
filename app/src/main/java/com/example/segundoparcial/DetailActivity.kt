@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.squareup.picasso.Picasso
 
 class DetailActivity : AppCompatActivity() {
+
+    //Declaro variables del UI
     private lateinit var imageView: ImageView
     private lateinit var tvName: TextView
     private lateinit var tvNro: TextView
@@ -24,6 +26,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        //Inicializo elementos del UI
         imageView = findViewById(R.id.imageDetail)
         tvName = findViewById(R.id.TVDetailName)
         tvNro = findViewById(R.id.TVDetailNumber)
@@ -33,6 +36,7 @@ class DetailActivity : AppCompatActivity() {
         tvWeight = findViewById(R.id.TVDetailWeigth)
         buttonVolver = findViewById(R.id.button)
 
+        //Recupero extras del intent
         val bundle = intent.extras
         val image = bundle?.getString("pokemonImage", "")
         val nro = bundle?.getInt("pokemonId", 0)
@@ -42,6 +46,8 @@ class DetailActivity : AppCompatActivity() {
         val type1 = bundle?.getString("pokemonPrimaryType", "")
         val type2 = bundle?.getString("pokemonSecondaryType", null)
 
+
+        //Muestro los datos elegidos en el UI
         Picasso.get()
             .load(image)
             .into(imageView)
@@ -53,6 +59,7 @@ class DetailActivity : AppCompatActivity() {
         tvHeight.text = "Height: $height"
         tvWeight.text = "Weight: $weight"
 
+        //OnClickListener del boton para volver a la actividad anterior
         buttonVolver.setOnClickListener {
             finish()
         }

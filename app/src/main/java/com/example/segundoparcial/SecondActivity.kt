@@ -17,15 +17,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SecondActivity : AppCompatActivity() {
+
+    //Declaro variables del UI
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: Adapter
     private lateinit var buttonVolver: Button
+
+    //Declaro variable de lista de detalles de pokemones
     private var pokemonDetailsList = mutableListOf<PokemonDetails>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        //Inicializo elementos del UI
         recyclerView = findViewById(R.id.recyclerView)
         buttonVolver = findViewById(R.id.button2)
 
@@ -33,6 +38,7 @@ class SecondActivity : AppCompatActivity() {
         adapter = Adapter(pokemonDetailsList)
         recyclerView.adapter = adapter
 
+        //OnClickListener del adapter
         adapter.onItemClickListener = { selectedPokemon ->
             val intent = Intent(this, DetailActivity::class.java).apply {
 
@@ -51,11 +57,13 @@ class SecondActivity : AppCompatActivity() {
 
         getPokemonList()
 
+        //OnClickListener de boton para volver a la actividad anterior
         buttonVolver.setOnClickListener {
             finish()
         }
     }
 
+    //Funcion que busca la lista de pokemones del endpoint con Retrofit
     private fun getPokemonList() {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java).getPokemonList()
@@ -71,6 +79,7 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
+    //Funcion que busca los detalles de cada pokemon del endpoint con Retrofit (Hay un URL que es solo la lista de pokemones, y despues cada pokemon tiene su propio URL con sus detalles)
     private fun fetchPokemonDetails(pokemonResult: PokemonResult) {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java).getPokemonDetails(pokemonResult.url)
@@ -87,6 +96,7 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
+    //Funcion Retrofit
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
