@@ -23,5 +23,7 @@ Una aplicación móvil desarrollada en Kotlin que interactúa con la API de Pok�
 2. **Exploración de Pokémon**: La app realiza una solicitud a la API de Pokémon para obtener una lista de Pokémon y la muestra en una RecyclerView.
 3. **Detalles interactivos**: Al seleccionar un Pokémon, se carga una nueva pantalla con su imagen y detalles clave, obtenidos también de la API.
 
+
+
 Video demostracion:
 [Screen_recording_20241124_161308.webm](https://github.com/user-attachments/assets/607bb424-de56-495d-862c-a29ff24747ec)
